@@ -4,7 +4,6 @@ import {Controls} from './components/Controls'
 import {History} from './components/HistoryList'
 import styles from "./counter.module.scss";
 
-
 export default function Counter() {
 
   const [count, setCount] = useState(0);
@@ -13,21 +12,18 @@ export default function Counter() {
   const canUndo = history.length >= 1 
 
   const handleIncrement = useCallback(() => {
-    setHistory([...history, count])
+    setHistory([...history, count].slice(-10))
     setCount(count + 1)
-    history.slice(-10)
   },[count])
 
   const handleDecrement = useCallback(() => {
-    setHistory([...history, count])
+    setHistory([...history, count].slice(-10))
     setCount(count - 1)
-    history.slice(-10)
   }, [count])
 
   const handleReset = useCallback(() => {
-    setHistory([...history, count])
+   setHistory([...history, count].slice(-10))
     setCount(0)
-    history.slice(-10)
   }, [count])
 
   const handleUndo = useCallback(() => {
