@@ -22,9 +22,9 @@ export default function Counter() {
   }, [count])
 
   const handleReset = useCallback(() => {
-   setHistory([...history, count].slice(-10))
+   setHistory([])
     setCount(0)
-  }, [count])
+  }, [])
 
   const handleUndo = useCallback(() => {
     const prev = history[history.length - 1]

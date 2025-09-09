@@ -1,14 +1,14 @@
 import { useReducer } from "react";
-import { validateName, validateEmail } from "./validators";
 import { initialState, profileReducer, type Role } from "./formReducer";
+import styles from './ProfileForm.module.scss'
 
 export const ProfileForm = () => {
 	const [state, dispatch] = useReducer(profileReducer, initialState);
 
 	return (
-		<form>
-			<label htmlFor="name">Name</label>
-			<input
+		<form className={styles.form}>
+			<label className={styles.label} htmlFor="name">Name</label>
+			<input className={styles.input}
 				value={state.name}
 				onChange={(e) => {
 					dispatch({ type: "change_name", payload: e.target.value });
@@ -20,9 +20,14 @@ export const ProfileForm = () => {
 				id="name"
 				placeholder="Name"
 			/>
+            {state.touched.name && state.errors.name && (
+                <p className={styles.p}>{state.errors.name}</p>
+            )}
+
+            <br />
 
 			<label htmlFor="email">Email</label>
-			<input
+			<input className={styles.input}
 				value={state.email}
 				onChange={(e) => {
 					dispatch({ type: "change_email", payload: e.target.value });
@@ -34,19 +39,30 @@ export const ProfileForm = () => {
 				id="email"
 				placeholder="Email"
 			/>
+            {state.touched.email && state.errors.email && (
+                <p className={styles.p}>{state.errors.email}</p>
+            )}
 
-			<label htmlFor="role">Role</label>
-			<select onChange={(e) => {dispatch({type: 'change_role', payload: e.target.value as Role})}} name="role" id="role">
+            <br />
+
+			<label className={styles.label} htmlFor="role">Role</label>
+			<select className={styles.select} onChange={(e) => {dispatch({type: 'change_role', payload: e.target.value as Role})}} name="role" id="role">
 				<option value="user">User</option>
 				<option value="admin">Admin</option>
 				<option value="editor">Editor</option>
 			</select>
 
-			<label htmlFor="checkbox">Subscribe</label>
-			<input checked={state.subscribe} onChange={() => dispatch({type: 'toggle_subscribe'})} type="checkbox" />
 
-			<button onClick={() => dispatch({type: 'validate_all'})}>Save</button>
-            <button onClick={() => dispatch({type: 'reset'})}>Reset</button>
+
+            <br />
+
+			<label className={styles.label} htmlFor="checkbox">Subscribe</label>
+			<input className={styles.input} checked={state.subscribe} onChange={() => dispatch({type: 'toggle_subscribe'})} type="checkbox" />
+
+            <br />
+
+			<button className={styles.button} onClick={() => dispatch({type: 'validate_all'})}>Save</button>
+            <button className={styles.button} onClick={() => dispatch({type: 'reset'})}>Reset</button>
 		</form>
 	);
 };

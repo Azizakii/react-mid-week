@@ -16,8 +16,8 @@ export const Controls = React.memo(({
 	onUndo,
 }: ControlsProps) => {
 	return (<div>
-		<button onClick={onIncrement}>-</button>
-		<button onClick={onDecrement}>+</button>
+		<button onClick={onIncrement}>+</button>
+		<button onClick={onDecrement}>-</button>
 		<button onClick={onReset}>Reset</button>
 		<button
 			onClick={onUndo}
